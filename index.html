@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: #fff;
+    }
+    header {
+      background: #1e293b;
+      padding: 20px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 15px;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #38bdf8;
+      color: black;
+      cursor: pointer;
+    }
+    footer {
+      background: #1e293b;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>My Portfolio</h1>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section id="about">
+  <h2>About Me</h2>
+  <p>Hello! Hi, I’m Nana Kwarteng, a third-year Computer Science student at All Nations University with a strong passion for cybersecurity and data center engineering. I enjoy turning complex problems into clear, practical solutions and thrive in collaborative environments where ideas can grow into impactful projects.
+
+I’m proficient in Python, C, MySQL, and Linux, and I hold a Google Cybersecurity Certificate that has strengthened my ability to protect systems from threats. Beyond technical skills, I value clarity, teamwork, and attention to detail—qualities that guide both my academic work and personal projects.
+
+Currently, I’m focused on gaining hands-on experience through internships and apprenticeships, applying my knowledge in real-world settings, and continuously learning to stay ahead in the fast-evolving tech landscape..</p>
+  <button onclick="changeText()">Click Me</button>
+  <p id="demo"></p>
+</section>
+
+<section id="projects">
+  <h2>My Projects</h2>
+  <div class="projects">
+    <div class="card">Project 1</div>
+    <div class="card">Project 2</div>
+    <div class="card">Project 3</div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Me</h2>
+  <p>Email: example@email.com</p>
+</section>
+
+<footer>
+  <p>© 2026 My Portfolio</p>
+</footer>
+
+<script>
+  function changeText() {
+    document.getElementById("demo").innerHTML = "Thanks for clicking! 🚀";
+  }
+</script>
+
+</body>
+</html>
