@@ -480,6 +480,16 @@
       transform: rotate(90deg);
     }
 
+    /* Preview Modal */
+    #previewModal .modal-content {
+      background: #0f172a;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+    }
+
+    #previewFrame {
+      background: white;
+    }
+
     
     @keyframes fadeIn {
       from {
@@ -599,6 +609,7 @@ Currently, I'm focused on gaining hands-on experience through internships and ap
     <span class="skill-tag">MySQL</span>
     <span class="skill-tag">Linux</span>
     <span class="skill-tag">Cybersecurity</span>
+    <span class="skill-tag">Data Center Engineering</span>
     <span class="skill-tag">Google Cybersecurity Cert</span>
   </div>
 </section>
@@ -608,15 +619,65 @@ Currently, I'm focused on gaining hands-on experience through internships and ap
   <button class="btn btn-primary" onclick="openAddProjectModal()" style="width: auto; margin: 0 auto 2rem; display: flex;">
     <i class="fas fa-plus"></i> Add New Project
   </button>
+  
+  <!-- Embedded To-Do App -->
+  <div style="max-width: 500px; margin: 3rem auto;">
+    <h3 style="color: #38bdf8; text-align: center; margin-bottom: 1rem;">Responsive To-Do List App</h3>
+    <div style="background: linear-gradient(135deg, #4e73df, #1cc88a); padding: 20px; border-radius: 15px; margin-bottom: 3rem;">
+      <div style="background: #fff; width: 100%; padding: 25px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+        <h4 style="text-align: center; margin-bottom: 20px; color: #333;">My To-Do List</h4>
+        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+          <input type="text" id="todoInput" placeholder="Add new task..." style="flex: 1; padding: 10px; border-radius: 8px; border: 1px solid #ccc; outline: none; font-size: 16px;">
+          <button onclick="addTodoTask()" style="padding: 10px 15px; border: none; border-radius: 8px; background: #4e73df; color: white; cursor: pointer; transition: 0.3s;">Add</button>
+        </div>
+        <ul id="todoList" style="list-style: none;"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embedded Auth Page -->
+  <div style="max-width: 500px; margin: 3rem auto;">
+    <h3 style="color: #38bdf8; text-align: center; margin-bottom: 1rem;">Sign Up / Sign In Page</h3>
+    <div style="background: linear-gradient(to right, #4b63ff, #a85fe4); padding: 20px; border-radius: 15px; margin-bottom: 3rem;">
+      <div style="background: white; padding: 40px; border-radius: 10px; box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);">
+        <h4 id="authTitle" style="text-align: center; color: #333; margin-bottom: 30px; font-size: 24px;">Sign Up</h4>
+        <form id="authForm">
+          <div style="margin-bottom: 20px;">
+            <div id="nameFieldAuth" style="display: flex; align-items: center; background: #eaeaea; border-radius: 5px; padding: 10px 20px; margin-bottom: 15px; gap: 15px; max-height: 60px; overflow: hidden; transition: max-height 0.3s ease;">
+              <i class="fa-regular fa-user" style="color: #666; font-size: 18px;"></i>
+              <input type="text" placeholder="Name" style="background: none; border: none; outline: none; width: 100%; color: #333; font-size: 16px;">
+            </div>
+
+            <div style="display: flex; align-items: center; background: #eaeaea; border-radius: 5px; padding: 10px 20px; margin-bottom: 15px; gap: 15px;">
+              <i class="fa-regular fa-envelope" style="color: #666; font-size: 18px;"></i>
+              <input type="email" placeholder="Email" style="background: none; border: none; outline: none; width: 100%; color: #333; font-size: 16px;">
+            </div>
+
+            <div style="display: flex; align-items: center; background: #eaeaea; border-radius: 5px; padding: 10px 20px; margin-bottom: 15px; gap: 15px;">
+              <i class="fa-solid fa-lock" style="color: #666; font-size: 18px;"></i>
+              <input type="password" placeholder="password" style="background: none; border: none; outline: none; width: 100%; color: #333; font-size: 16px;">
+            </div>
+            <p style="text-align: right; color: #666; font-size: 13px; margin-top: 10px;">Forgot Password <a href="#" style="color: #4b63ff; text-decoration: none; font-weight: 600;">Click Here</a></p>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 30px;">
+            <button type="button" id="authSignupBtn" style="padding: 12px; border: none; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; background: linear-gradient(to right, #4b63ff, #a85fe4); color: white; transition: 0.3s;">Sign Up</button>
+            <button type="button" id="authSigninBtn" class="disable" style="padding: 12px; border: none; border-radius: 5px; font-size: 16px; font-weight: 600; cursor: pointer; background: #eaeaea; color: #333; transition: 0.3s; opacity: 0.5; cursor: not-allowed;">Sign In</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Projects Section -->
   <div class="projects-container" id="projectsContainer">
     <div class="empty-state">
       <i class="fas fa-briefcase"></i>
-      <p>No projects yet. Click "Add New Project" to showcase your work!</p>
+      <p>Add more projects using the button above!</p>
     </div>
   </div>
 </section>
 
-
+<!-- Add Project Modal -->
 <div class="modal" id="addProjectModal">
   <div class="modal-content">
     <button class="modal-close" onclick="closeAddProjectModal()">&times;</button>
@@ -709,52 +770,169 @@ Currently, I'm focused on gaining hands-on experience through internships and ap
   </div>
 </section>
 
+<!-- Project Preview Modal -->
+<div class="modal" id="previewModal">
+  <div class="modal-content" style="max-width: 90vw; max-height: 90vh; padding: 0; overflow: hidden;">
+    <button class="modal-close" onclick="closeProjectPreview()">&times;</button>
+    <iframe id="previewFrame" style="width: 100%; height: 100%; border: none; display: block;" src=""></iframe>
+  </div>
+</div>
+
 <footer>
   <p>© 2026 Nana Kwarteng. All rights reserved. Crafted with <span style="color: #ef4444;">❤</span> using HTML, CSS & JavaScript</p>
 </footer>
 
 <script>
-  
+  // Load projects from localStorage on page load
   let projects = JSON.parse(localStorage.getItem('portfolioProjects')) || [];
 
-  
-  if (projects.length === 0) {
-    projects = [
-      {
-        id: 1,
-        title: "Responsive To-Do List App",
-        description: "A fully functional to-do list application with task management capabilities. Users can add, complete, and delete tasks with persistent storage using localStorage. Features a clean, responsive interface that works seamlessly on all devices.",
-        date: "2025-05",
-        status: "Completed",
-        tech: ["HTML", "CSS", "JavaScript", "LocalStorage"],
-        link: https://github.com/NanaKK247/porfolio_website/blob/cec05724d946ab8e5f386dc47c81a3d8e6818f94/todo%20list,
-        github: https://github.com/NanaKK247/porfolio_website/blob/cec05724d946ab8e5f386dc47c81a3d8e6818f94/todo%20list
-      },
-      {
-        id: 2,
-        title: "Sign Up / Sign In Page",
-        description: "A modern authentication interface with smooth transitions between sign-up and sign-in modes. Features form validation, Font Awesome icons, and an elegant design with responsive layout. Perfect as a base for any authentication system.",
-        date: "2025-05",
-        status: "Completed",
-        tech: ["HTML", "CSS", "JavaScript", "Responsive Design"],
-        link: https://github.com/NanaKK247/porfolio_website/blob/52f9eeb7bf8f7902ab6497a1b54c88f5172a1dc3/login%20page,
-        github: https://github.com/NanaKK247/porfolio_website/blob/52f9eeb7bf8f7902ab6497a1b54c88f5172a1dc3/login%20page
-      },
-      
-    ];
-    saveProjects();
+  // Initialize embedded apps
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeTodoApp();
+    initializeAuthApp();
+    renderAdditionalProjects();
+  });
+
+  // ========== TO-DO APP ==========
+  function initializeTodoApp() {
+    const todoInput = document.getElementById('todoInput');
+    const todoList = document.getElementById('todoList');
+
+    // Load existing todos
+    renderTodos();
+
+    // Add event listeners
+    document.querySelector('button[onclick="addTodoTask()"]').addEventListener('click', addTodoTask);
+    todoInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        addTodoTask();
+      }
+    });
   }
 
-  renderProjects();
+  function addTodoTask() {
+    const todoInput = document.getElementById('todoInput');
+    const taskText = todoInput.value.trim();
+    
+    if (taskText === '') return;
 
-  function renderProjects() {
+    const task = {
+      id: Date.now(),
+      text: taskText,
+      completed: false
+    };
+
+    saveTodoTask(task);
+    todoInput.value = '';
+    renderTodos();
+  }
+
+  function renderTodos() {
+    const todoList = document.getElementById('todoList');
+    const todos = getTodos();
+    
+    todoList.innerHTML = '';
+    todos.forEach(todo => {
+      const li = document.createElement('li');
+      li.style.cssText = 'display: flex; align-items: center; justify-content: space-between; background: #f8f9fc; padding: 10px; border-radius: 8px; margin-bottom: 10px; transition: 0.3s;';
+      
+      if (todo.completed) {
+        li.style.background = '#e8f5e9';
+      }
+
+      const span = document.createElement('span');
+      span.className = 'task-text';
+      span.textContent = todo.text;
+      span.style.cssText = 'flex: 1; cursor: pointer;' + (todo.completed ? 'text-decoration: line-through; color: gray;' : '');
+      span.onclick = () => toggleTodo(todo.id);
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.textContent = 'X';
+      deleteBtn.style.cssText = 'background: red; color: white; border: none; padding: 5px 8px; border-radius: 5px; cursor: pointer;';
+      deleteBtn.onclick = () => deleteTodo(todo.id);
+
+      li.appendChild(span);
+      li.appendChild(deleteBtn);
+      todoList.appendChild(li);
+    });
+  }
+
+  function toggleTodo(id) {
+    const todos = getTodos();
+    const todo = todos.find(t => t.id === id);
+    if (todo) {
+      todo.completed = !todo.completed;
+      localStorage.setItem('todos', JSON.stringify(todos));
+      renderTodos();
+    }
+  }
+
+  function deleteTodo(id) {
+    let todos = getTodos();
+    todos = todos.filter(t => t.id !== id);
+    localStorage.setItem('todos', JSON.stringify(todos));
+    renderTodos();
+  }
+
+  function saveTodoTask(task) {
+    const todos = getTodos();
+    todos.push(task);
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }
+
+  function getTodos() {
+    return JSON.parse(localStorage.getItem('todos')) || [];
+  }
+
+  
+  function initializeAuthApp() {
+    const authSignupBtn = document.getElementById('authSignupBtn');
+    const authSigninBtn = document.getElementById('authSigninBtn');
+    const nameFieldAuth = document.getElementById('nameFieldAuth');
+    const authTitle = document.getElementById('authTitle');
+
+    authSignupBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchToAuthSignup(authSignupBtn, authSigninBtn, nameFieldAuth, authTitle);
+    });
+
+    authSigninBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchToAuthSignin(authSignupBtn, authSigninBtn, nameFieldAuth, authTitle);
+    });
+  }
+
+  function switchToAuthSignup(signupBtn, signinBtn, nameField, title) {
+    nameField.style.maxHeight = '60px';
+    title.innerHTML = 'Sign Up';
+    signupBtn.style.opacity = '1';
+    signupBtn.style.cursor = 'pointer';
+    signinBtn.style.opacity = '0.5';
+    signinBtn.style.cursor = 'not-allowed';
+    signupBtn.classList.remove('disable');
+    signinBtn.classList.add('disable');
+  }
+
+  function switchToAuthSignin(signupBtn, signinBtn, nameField, title) {
+    nameField.style.maxHeight = '0';
+    title.innerHTML = 'Sign In';
+    signupBtn.style.opacity = '0.5';
+    signupBtn.style.cursor = 'not-allowed';
+    signinBtn.style.opacity = '1';
+    signinBtn.style.cursor = 'pointer';
+    signupBtn.classList.add('disable');
+    signinBtn.classList.remove('disable');
+  }
+
+  
+  function renderAdditionalProjects() {
     const container = document.getElementById('projectsContainer');
     
     if (projects.length === 0) {
       container.innerHTML = `
         <div class="empty-state">
           <i class="fas fa-briefcase"></i>
-          <p>No projects yet. Click "Add New Project" to showcase your work!</p>
+          <p>Add more projects using the button above!</p>
         </div>
       `;
       return;
@@ -773,6 +951,7 @@ Currently, I'm focused on gaining hands-on experience through internships and ap
         ` : ''}
         <div class="card-actions">
           ${project.link && project.link !== '#' ? `<a href="${project.link}" target="_blank" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> View</a>` : ''}
+          ${project.preview ? `<button class="btn btn-secondary" onclick="openProjectPreview('${project.preview}')"><i class="fas fa-eye"></i> Preview</button>` : ''}
           ${project.github && project.github !== '#' ? `<a href="${project.github}" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> GitHub</a>` : ''}
           <button class="btn btn-danger" onclick="deleteProject(${project.id})"><i class="fas fa-trash"></i> Delete</button>
         </div>
@@ -805,7 +984,7 @@ Currently, I'm focused on gaining hands-on experience through internships and ap
 
     projects.unshift(newProject);
     saveProjects();
-    renderProjects();
+    renderAdditionalProjects();
     closeAddProjectModal();
   }
 
@@ -813,7 +992,7 @@ Currently, I'm focused on gaining hands-on experience through internships and ap
     if (confirm('Are you sure you want to delete this project?')) {
       projects = projects.filter(p => p.id !== id);
       saveProjects();
-      renderProjects();
+      renderAdditionalProjects();
     }
   }
 
@@ -843,6 +1022,26 @@ Currently, I'm focused on gaining hands-on experience through internships and ap
       targetSection.scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  
+  function openProjectPreview(filePath) {
+    const previewFrame = document.getElementById('previewFrame');
+    previewFrame.src = filePath;
+    document.getElementById('previewModal').classList.add('active');
+  }
+
+  function closeProjectPreview() {
+    document.getElementById('previewModal').classList.remove('active');
+    document.getElementById('previewFrame').src = '';
+  }
+
+  
+  document.getElementById('previewModal').addEventListener('click', (e) => {
+    if (e.target.id === 'previewModal') {
+      closeProjectPreview();
+    }
+  });
+
 </script>
 
 </body>
