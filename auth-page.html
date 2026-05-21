@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            right: -100px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -150px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(20px); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .Inputfield {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .Inputfield:focus-within {
+            border-color: #667eea;
+            background: #fff;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .Inputfield i {
+            color: #667eea;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .Inputfield input {
+            flex: 1;
+            border: none;
+            background: none;
+            outline: none;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .Inputfield input::placeholder {
+            color: #999;
+        }
+
+        #nameField {
+            max-height: 60px;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+
+        .input-group p {
+            text-align: right;
+            color: #667eea;
+            font-size: 0.85rem;
+            margin-top: 10px;
+        }
+
+        .input-group a {
+            color: #764ba2;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .input-group a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+
+        .btn-field {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        #signupBtn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        #signupBtn:hover:not(.disable) {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        #signupBtn:active:not(.disable) {
+            transform: translateY(-1px);
+        }
+
+        #signinBtn {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #eee;
+        }
+
+        #signinBtn:hover:not(.disable) {
+            background: #e0e0e0;
+            border-color: #ccc;
+        }
+
+        button.disable {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .toggle-info {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .toggle-info a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .toggle-info a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(76, 175, 80, 0.1);
+            border: 2px solid #4caf50;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            animation: slideDown 0.3s ease;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .form-box {
+                padding: 25px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 20px;
+            }
+
+            .Inputfield {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+
+            .btn-field {
+                flex-direction: column;
+            }
+
+            .btn-field button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <div class="success-message" id="successMessage">
+                <i class="fas fa-check-circle"></i> Welcome! You're all set.
+            </div>
+
+            <h1 id="title">Sign Up</h1>
+            <form onsubmit="handleSubmit(event)">
+                <div class="input-group">
+                    <div class="Inputfield" id="nameField">
+                        <i class="fa-regular fa-user"></i>
+                        <input type="text" id="nameInput" placeholder="Full Name"> 
+                    </div>
+
+                    <div class="Inputfield">
+                        <i class="fa-regular fa-envelope"></i>
+                        <input type="email" id="emailInput" placeholder="Email Address"> 
+                    </div>
+
+                    <div class="Inputfield">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="passwordInput" placeholder="Password"> 
+                    </div>
+                    <p><a href="#">Forgot Password?</a></p>
+                </div>
+                <div class="btn-field">
+                    <button type="button" id="signupBtn">Sign Up</button>
+                    <button type="button" id="signinBtn" class="disable">Sign In</button>
+                </div>
+            </form>
+
+            <div class="toggle-info">
+                <span id="toggleText">Already have an account? </span>
+                <a id="toggleLink" onclick="toggleMode()">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const signupBtn = document.getElementById("signupBtn");
+        const signinBtn = document.getElementById("signinBtn");
+        const nameField = document.getElementById("nameField");
+        const title = document.getElementById("title");
+        const toggleText = document.getElementById("toggleText");
+        const toggleLink = document.getElementById("toggleLink");
+        const successMessage = document.getElementById("successMessage");
+        const form = document.querySelector("form");
+
+        let isSignupMode = true;
+
+        signupBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            switchToSignup();
+        });
+
+        signinBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            switchToSignin();
+        });
+
+        function switchToSignup() {
+            if (!isSignupMode) {
+                nameField.style.maxHeight = "60px";
+                title.innerHTML = "Sign Up";
+                signupBtn.classList.remove("disable");
+                signinBtn.classList.add("disable");
+                toggleText.textContent = "Already have an account? ";
+                toggleLink.textContent = "Sign In";
+                isSignupMode = true;
+                form.reset();
+                successMessage.classList.remove("show");
+            }
+        }
+
+        function switchToSignin() {
+            if (isSignupMode) {
+                nameField.style.maxHeight = "0";
+                title.innerHTML = "Sign In";
+                signupBtn.classList.add("disable");
+                signinBtn.classList.remove("disable");
+                toggleText.textContent = "Don't have an account? ";
+                toggleLink.textContent = "Sign Up";
+                isSignupMode = false;
+                form.reset();
+                successMessage.classList.remove("show");
+            }
+        }
+
+        function toggleMode() {
+            if (isSignupMode) {
+                switchToSignin();
+            } else {
+                switchToSignup();
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const email = document.getElementById("emailInput").value.trim();
+            const password = document.getElementById("passwordInput").value.trim();
+            const name = document.getElementById("nameInput").value.trim();
+
+            if (!email || !password) {
+                alert("Please fill in all required fields");
+                return;
+            }
+
+            if (!isSignupMode && (!name && email && password)) {
+                // Sign In mode
+                successMessage.innerHTML = '<i class="fas fa-check-circle"></i> Welcome back!';
+                successMessage.classList.add("show");
+                setTimeout(() => {
+                    form.reset();
+                    successMessage.classList.remove("show");
+                }, 2000);
+                return;
+            }
+
+            if (isSignupMode && (!name || !email || !password)) {
+                alert("Please fill in all required fields");
+                return;
+            }
+
+            // Sign Up mode
+            successMessage.innerHTML = `<i class="fas fa-check-circle"></i> Welcome ${name}! Your account has been created.`;
+            successMessage.classList.add("show");
+            setTimeout(() => {
+                form.reset();
+                successMessage.classList.remove("show");
+            }, 2500);
+        }
+
+        // Allow Enter key to submit
+        form.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                handleSubmit(e);
+            }
+        });
+    </script>
+</body>
+</html>
